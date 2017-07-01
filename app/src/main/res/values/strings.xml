@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Miwok App</string>
+
+    <!--Category name for the phrases-->
+    <string name="category_phrases">Phrases</string>
+
+    <!--Category name for the vocabulary custom_view for colours-->
+    <string name="category_colors">Colours</string>
+
+    <!--Category name for the vocabulary custom_view for numbers-->
+    <string name="category_numbers">Numbers</string>
+
+
+    <!--Category name for the vocabulary for the family members-->
+    <string name="category_family">Family Members</string>
+
+</resources>
