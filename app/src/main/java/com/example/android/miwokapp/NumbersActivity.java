@@ -14,16 +14,16 @@ public class NumbersActivity extends AppCompatActivity {
         setContentView(R.layout.list_view);
         ArrayList<Word> word = new ArrayList<Word>();
 
-        word.add (new Word("One","Lutti"));
-        word.add (new Word("Two", "Otiiko"));
-        word.add (new Word("Three","Tolookosu"));
-        word.add (new Word("Four","Oyyisa"));
-        word.add (new Word("Five", "Massokka"));
-        word.add (new Word("Six", "Temmokka"));
-        word.add (new Word("Seven", "Kenekaku"));
-        word.add (new Word("Eight", "Kawinta"));
-        word.add (new Word("Nine", "Wo'e"));
-        word.add (new Word("Ten", "Na'aacha"));
+        word.add(new Word("One", "Lutti", R.drawable.number_one));
+        word.add(new Word("Two", "Otiiko", R.drawable.number_two));
+        word.add(new Word("Three", "Tolookosu", R.drawable.number_three));
+        word.add(new Word("Four", "Oyyisa", R.drawable.number_four));
+        word.add(new Word("Five", "Massokka", R.drawable.number_five));
+        word.add(new Word("Six", "Temmokka", R.drawable.number_six));
+        word.add(new Word("Seven", "Kenekaku", R.drawable.number_seven));
+        word.add(new Word("Eight", "Kawinta", R.drawable.number_eight));
+        word.add(new Word("Nine", "Wo'e", R.drawable.number_nine));
+        word.add(new Word("Ten", "Na'aacha", R.drawable.number_ten));
 
         /** This code section explains using a Linear Layout, a TextView and a for loop*/
 
