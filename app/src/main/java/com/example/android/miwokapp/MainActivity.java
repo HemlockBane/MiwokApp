@@ -82,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
 
+              Toast.makeText(v.getContext(), "Open the phrases activity", Toast.LENGTH_SHORT).show();
+
+              Intent colorsIntent = new Intent(MainActivity.this, PhrasesActivity.class);
+
+              startActivity(colorsIntent);
+
           }
       });
 
