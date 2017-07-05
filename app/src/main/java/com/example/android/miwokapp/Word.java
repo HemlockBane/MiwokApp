@@ -5,10 +5,9 @@ package com.example.android.miwokapp;
  */
 
 public class Word {
+    private static final int HAS_IMAGE = -1;
     private String mDefaultTranslation;
-
     private String mMiwokTranslation;
-
     private int mImageResourceId;
 
 
