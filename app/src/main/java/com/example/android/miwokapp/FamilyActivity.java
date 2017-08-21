@@ -1,19 +1,30 @@
 package com.example.android.miwokapp;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class FamilyActivity extends AppCompatActivity {
+    private MediaPlayer mMediaPlayer;
+
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
-        ArrayList<Word> word = new ArrayList<Word>();
 
+        final ArrayList<Word> word = new ArrayList<>();
 
         word.add(new Word("Father", "apa", R.drawable.family_father));
         word.add(new Word("Mother", "ata", R.drawable.family_mother));
@@ -29,10 +40,33 @@ public class FamilyActivity extends AppCompatActivity {
 
         /** Using WordAdapter aAnd ListView*/
 
-        WordAdapter numbersAdapter = new WordAdapter(this, word);
+        WordAdapter numbersAdapter = new WordAdapter(this, word, R.color.category_classless2);
 
         ListView numberListView = (ListView) findViewById(R.id.list);
 
         numberListView.setAdapter(numbersAdapter);
+
+        numberListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Word words = word.get(position);
+
+                mMediaPlayer = MediaPlayer.create(FamilyActivity.this, words.getAudioResourceId());
+
+                mMediaPlayer.start();
+
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+
+            }
+        });
+    }
+
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+
+            mMediaPlayer = null;
+        }
     }
 }

@@ -21,5 +21,9 @@
 
     <!-- Background color for the phrases category -->
     <color name="category_phrases">#16AFCA</color>
+
+    <color name="category_classless">#000</color>
+
+    <color name="category_classless2">#757575</color>
 </resources>
 

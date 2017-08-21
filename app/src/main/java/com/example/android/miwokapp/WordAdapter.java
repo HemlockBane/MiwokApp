@@ -3,6 +3,7 @@ package com.example.android.miwokapp;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,15 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
     private static final String LOG_TAG = WordAdapter.class.getSimpleName();
 
-    public WordAdapter(Activity context, ArrayList<Word> word) {
+    private int mColorResourceId;
+
+    public WordAdapter(Activity context, ArrayList<Word> word, int colorResourceId) {
 
         super(context, 0, word);
+
+        mColorResourceId = colorResourceId;
+
+
     }
 
     @NonNull
@@ -44,12 +51,26 @@ public class WordAdapter extends ArrayAdapter<Word> {
         defaultTextView.setText(currentWord.getDefaultTranslation());
 
         ImageView iconView = (ImageView) listItemView.findViewById(R.id.image_text_view);
-        iconView.setImageResource(currentWord.getImageResourceId());
 
+
+        if (currentWord.hasImage()) {
+
+            iconView.setImageResource(currentWord.getImageResourceId());
+            iconView.setVisibility(View.VISIBLE);
+
+        } else {
+            iconView.setVisibility(View.GONE);
+        }
+
+
+        View colorContainer = listItemView.findViewById(R.id.text_container);
+
+        int color = ContextCompat.getColor(getContext(), mColorResourceId);
+
+        colorContainer.setBackgroundColor(color);
 
 
         return listItemView;
-
 
     }
 }

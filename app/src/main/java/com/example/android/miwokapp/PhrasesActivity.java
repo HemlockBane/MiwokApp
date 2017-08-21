@@ -1,37 +1,76 @@
 package com.example.android.miwokapp;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class PhrasesActivity extends AppCompatActivity {
+    private MediaPlayer mMediaPlayer;
+
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
-        ArrayList<Word> word = new ArrayList<Word>();
+        final ArrayList<Word> word = new ArrayList<>();
 
-        word.add(new Word("Where are you going?", "minto wuksus", R.drawable.color_red));
-        word.add(new Word("What is your name?", "tinna oyaase'na", R.drawable.color_mustard_yellow));
-        word.add(new Word("My name is...", "oyaaset", R.drawable.color_dusty_yellow));
-        word.add(new Word("How are you feeling?", "michaksas", R.drawable.color_green));
-        word.add(new Word("I'm feeling good", "kuchi achit", R.drawable.color_brown));
-        word.add(new Word("Are you coming?", "aanas'aa", R.drawable.color_gray));
-        word.add(new Word("Yes, I'm coming?", "haa'aanam", R.drawable.color_black));
-        word.add(new Word("I'm coming?", "aanam", R.drawable.color_white));
-        word.add(new Word("Let's go", "yoowutis", R.drawable.color_white));
-        word.add(new Word("Come here", "anni'nem", R.drawable.color_white));
+        word.add(new Word("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
+        word.add(new Word("What is your name?", "tinna oyaase'na", R.raw.phrase_what_is_your_name));
+        word.add(new Word("My name is", "oyaaset", R.raw.phrase_my_name_is));
+        word.add(new Word("How are you feeling?", "michakas", R.raw.phrase_how_are_you_feeling));
+        word.add(new Word("I'm feeling good?", "kuchi achit", R.raw.phrase_im_feeling_good));
+        word.add(new Word("Are you coming?", "senes'aa", R.raw.phrase_are_you_coming));
+        word.add(new Word("Yes I'm coming?", "haa'aanam", R.raw.phrase_yes_im_coming));
+        word.add(new Word("I'm coming", "aanam", R.raw.phrase_im_coming));
+        word.add(new Word("Let's go", "yoowutis", R.raw.phrase_lets_go));
+        word.add(new Word("Come here", "anni'nem", R.raw.phrase_come_here));
 
 
-        /** Using WordAdapter aAnd ListView*/
+        /** Using WordAdapter and ListView*/
 
-        WordAdapter numbersAdapter = new WordAdapter(this, word);
+        WordAdapter numbersAdapter = new WordAdapter(this, word, R.color.category_classless2);
 
         ListView numberListView = (ListView) findViewById(R.id.list);
 
         numberListView.setAdapter(numbersAdapter);
+
+        numberListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Word words = word.get(position);
+
+                mMediaPlayer.release();
+
+                mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, words.getAudioResourceId());
+
+                mMediaPlayer.start();
+
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+
+            }
+        });
+
+
+    }
+
+
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+
+            mMediaPlayer = null;
+        }
     }
 }
