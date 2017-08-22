@@ -52,6 +52,8 @@ public class FamilyActivity extends AppCompatActivity {
 
                 Word words = word.get(position);
 
+                releaseMediaPlayer();
+
                 mMediaPlayer = MediaPlayer.create(FamilyActivity.this, words.getAudioResourceId());
 
                 mMediaPlayer.start();
@@ -64,6 +66,7 @@ public class FamilyActivity extends AppCompatActivity {
 
     private void releaseMediaPlayer() {
         if (mMediaPlayer != null) {
+
             mMediaPlayer.release();
 
             mMediaPlayer = null;

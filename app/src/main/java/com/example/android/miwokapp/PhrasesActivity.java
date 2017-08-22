@@ -51,7 +51,7 @@ public class PhrasesActivity extends AppCompatActivity {
 
                 Word words = word.get(position);
 
-                mMediaPlayer.release();
+                releaseMediaPlayer();
 
                 mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, words.getAudioResourceId());
 
@@ -65,9 +65,16 @@ public class PhrasesActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        releaseMediaPlayer();
+    }
 
     private void releaseMediaPlayer() {
         if (mMediaPlayer != null) {
+
             mMediaPlayer.release();
 
             mMediaPlayer = null;
